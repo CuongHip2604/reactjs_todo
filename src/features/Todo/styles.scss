@@ -1,0 +1,20 @@
+._wrap_todos {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  height: 100vh;
+
+  .todos {
+    width: 34.375rem;
+    min-height: 4.0625rem;
+    max-height: 36.25rem;
+    height: auto;
+
+    margin: auto;
+    margin-top: 130px;
+
+    position: relative;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+  }
+}
