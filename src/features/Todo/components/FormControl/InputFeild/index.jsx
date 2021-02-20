@@ -1,6 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import { Controller } from 'react-hook-form';
+import './styles.scss';
 
 InputFeild.propTypes = {
   form: PropTypes.object,
@@ -9,10 +10,9 @@ InputFeild.propTypes = {
 
 function InputFeild(props) {
   const { form, name } = props;
-  const { errors, formState } = form
+  const { errors, formState } = form;
 
-  const hasError = errors[name] && formState.isSubmitted
-  console.log(errors[name], formState.touched[name]);
+  const hasError = errors[name] && formState.isSubmitted;
 
   return (
     <Controller
@@ -21,7 +21,10 @@ function InputFeild(props) {
       as={
         <div>
           <input type="text" className="new_todo _form" placeholder="What needs to be done?" />
-          {hasError && <span>{errors[name]?.message}</span>}
+          <input id="toggle_all" className="toggle_all" type="checkbox" />
+          <label htmlFor="toggle_all"></label>
+
+          {hasError && <div className="error">{errors[name]?.message}</div>}
         </div>
       }
     ></Controller>
