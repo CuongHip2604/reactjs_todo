@@ -1,8 +1,9 @@
 const { createSlice } = require('@reduxjs/toolkit');
 
+const initialState = [];
 const todoSlice = createSlice({
-  name: 'todo',
-  initialState: [],
+  name: 'todos',
+  initialState,
   reducers: {
     getTodos: (state, actions) => {
       return state;
@@ -11,13 +12,19 @@ const todoSlice = createSlice({
       return state;
     },
     addNewTodo: (state, actions) => {
+      state.push(actions.payload);
       return state;
     },
     updateTodo: (state, actions) => {
-      return state;
+      const newTask = actions.payload
+      const taskIndex = state.findIndex(task => task.id === newTask.id)
+      if (taskIndex >= 0) {
+        state[taskIndex] = newTask
+      }
     },
     deleteTodo: (state, actions) => {
-      return state;
+      const removeTaskId = actions.payload
+      return state.filter(task => task.id !== removeTaskId)
     },
   },
 });

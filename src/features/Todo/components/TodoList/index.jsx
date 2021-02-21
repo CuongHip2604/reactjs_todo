@@ -1,16 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
-import './styles.scss'
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import TodoItem from './components/TodoItem';
+import './styles.scss';
 
-TodoList.propTypes = {
-  
-};
+TodoList.propTypes = {};
 
 function TodoList(props) {
+  const listTodo = useSelector((state) => state.todos);
   return (
-    <TodoItem />
+    <div>
+      {listTodo && (
+        <div>
+          {listTodo.map((todo) => (
+            <TodoItem todo={todo} key={todo.id} />
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 
