@@ -1,7 +1,7 @@
-import { deleteTodo, updateTodo } from 'features/Todo/todoSlice';
+import { deleteTodo, updateTodo, setIsUpdate } from 'features/Todo/todoSlice';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import EditIcon from '@material-ui/icons/Edit';
 import './styles.scss';
 
@@ -11,6 +11,7 @@ TodoItem.propTypes = {
 
 function TodoItem(props) {
   const { todo } = props;
+  const isUpdate = useSelector((state) => state.todos.isUpdate);
   const dispatch = useDispatch();
 
   const handleOnChange = (value) => {
@@ -26,7 +27,14 @@ function TodoItem(props) {
     const action = deleteTodo(todo.id);
     dispatch(action);
   };
-  const handleDoubleClick = () => {};
+  const handleUpdateTodo = (todo) => {
+    const payload = {
+      isUpdate: true,
+      todo: todo,
+    };
+    const actions = setIsUpdate(payload);
+    dispatch(actions);
+  };
   return (
     <div>
       <section className="_main">
@@ -39,7 +47,7 @@ function TodoItem(props) {
                 onChange={(value) => handleOnChange(value)}
               />
               <label>{todo.taskName}</label>
-              <div className="_edit">
+              <div className="_edit" onClick={() => handleUpdateTodo(todo)}>
                 <EditIcon />
               </div>
               <button className="_destroy" onClick={() => handleRemoveTask(todo)}></button>

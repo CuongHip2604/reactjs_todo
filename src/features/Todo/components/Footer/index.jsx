@@ -5,18 +5,20 @@ import './styles.scss';
 Footer.propTypes = {};
 
 function Footer(props) {
-  const listTodo = useSelector((state) => state.todos);
+  const listTodo = useSelector((state) => state.todos.listTodo);
   const [isTodo, setIsTodo] = useState(false);
   useEffect(() => {
-    if (listTodo.length > 0) {
+    if (listTodo?.length > 0) {
       setIsTodo(true);
+    } else {
+      setIsTodo(false);
     }
   }, [listTodo]);
   return (
     <div>
       {isTodo && (
         <div className="footer">
-          <span className="_todo_count">{listTodo.length} items</span>
+          <span className="_todo_count">{listTodo?.length} items</span>
           <ul className="filters">
             <li>
               <a href="#" className="selected">

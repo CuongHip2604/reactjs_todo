@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles.scss';
 import TodoForm from '../TodoForm';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import { addNewTodo } from 'features/Todo/todoSlice';
+import { addNewTodo, getTodo } from 'features/Todo/todoSlice';
 
 Header.propTypes = {};
 
 function Header(props) {
   const dispatch = useDispatch();
+  const isUpdate = useSelector((state) => state.todos.isUpdate);
+  const todo = useSelector((state) => state.todos.todo);
 
   const handleOnSubmit = (values) => {
     const params = {
@@ -22,7 +24,7 @@ function Header(props) {
   return (
     <div className="header">
       <h1>todos</h1>
-      <TodoForm onSubmit={handleOnSubmit} />
+      <TodoForm onSubmit={handleOnSubmit} todo={todo} isUpdate={isUpdate} />
     </div>
   );
 }

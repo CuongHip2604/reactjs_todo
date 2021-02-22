@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import TodoItem from './components/TodoItem';
 import './styles.scss';
@@ -6,7 +6,7 @@ import './styles.scss';
 TodoList.propTypes = {};
 
 function TodoList(props) {
-  const listTodo = useSelector((state) => state.todos);
+  const listTodo = useSelector((state) => state.todos.listTodo);
   return (
     <div>
       {listTodo && (
